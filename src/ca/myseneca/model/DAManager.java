@@ -9,16 +9,22 @@ package ca.myseneca.model;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+import ca.myseneca.datasource.ConnectionPool;
+
 import java.math.BigDecimal;
 import oracle.jdbc.*;
 
 public class DAManager {
-	private DBUtil dbUtil = new DBUtil();
-	private Connection conn;
+	
+	private static Connection conn;
+	static {
+		conn = ConnectionPool.getInstance().getConnection();
+	}
 
 	public static int getEmployeeID(String user, String password) {
 		int result = -1;
-		Connection conn = null;
+		//Connection conn = null;
 		CallableStatement stmt = null;
 		try {
 			// DBUtil dbUtil = new DBUtil();
