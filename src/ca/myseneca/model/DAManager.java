@@ -29,7 +29,7 @@ public class DAManager {
 	
 		CallableStatement stmt = null;
 		try {
-			// DBUtil dbUtil = new DBUtil();
+			
 			if (conn == null) {
 				conn = ConnectionPool.getInstance().getConnection();
 			}
@@ -128,11 +128,9 @@ public class DAManager {
 
 	public static ArrayList<Employee> getAllEmployees() {
 		ArrayList<Employee> allEmps = new ArrayList<Employee>();
-		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rset = null;
 		try {
-
 			conn = DBUtil.getConnection();
 			stmt = conn.createStatement();
 			String sql = "SELECT * FROM EMPLOYEES";
@@ -179,20 +177,20 @@ public class DAManager {
 					DBUtil.printSQLException(e);
 				}
 			}
-			if (conn != null) {
+			/*if (conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException e) {
 					DBUtil.printSQLException(e);
 				}
-			}
+			}*/
 		}
 		return allEmps;
 	}
 
 	public static ArrayList<Employee> getEmployeesByDepartmentID(int depid) {
 		ArrayList<Employee> allEmps = new ArrayList<Employee>();
-		Connection conn = null;
+		
 		Statement stmt = null;
 		ResultSet rset = null;
 		try {
