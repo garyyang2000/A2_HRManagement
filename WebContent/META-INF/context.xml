@@ -12,9 +12,10 @@
         
     <Resource name="jdbc/oracle_cjv805_161a19" auth="Container" 
         driverClassName="oracle.jdbc.OracleDriver" 
-        url="jdbc:oracle:thin:@//zenit.senecac.on.ca:1521/neptune" 
+        url="jdbc:oracle:thin:@//zenit.senecac.on.ca:1521/neptune"         
         username="cjv805_161a19" password="fpNA6842" 
         maxActive="100" maxIdle="30" maxWait="10000" 
+        accessToUnderlyingConnectionAllowed = "true"
         logAbandoned="true" removeAbandoned="true" 
         removeAbandonedTimeout="60" type="javax.sql.DataSource" /> 
 </Context>

@@ -16,19 +16,23 @@ import java.math.BigDecimal;
 import oracle.jdbc.*;
 
 public class DAManager {
-	
+
 	private static Connection conn;
 	static {
-		conn = ConnectionPool.getInstance().getConnection();
+		if (conn == null) {
+			conn = ConnectionPool.getInstance().getConnection();
+		}
 	}
 
 	public static int getEmployeeID(String user, String password) {
 		int result = -1;
-		//Connection conn = null;
+	
 		CallableStatement stmt = null;
 		try {
 			// DBUtil dbUtil = new DBUtil();
-			conn = DBUtil.getConnection();
+			if (conn == null) {
+				conn = ConnectionPool.getInstance().getConnection();
+			}
 			stmt = conn.prepareCall("{?=call P_SECURITY.F_SECURITY(?,?)}");
 			stmt.setInt(1, result);
 			stmt.setString(2, user);
@@ -54,13 +58,13 @@ public class DAManager {
 					DBUtil.printSQLException(e);
 				}
 			}
-			if (conn != null) {
+			/*if (conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException e) {
 					DBUtil.printSQLException(e);
 				}
-			}
+			}*/
 		}
 		return result;
 	}
@@ -69,7 +73,7 @@ public class DAManager {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			// DBUtil dbUtil = new DBUtil();
+			
 			conn = DBUtil.getConnection();
 			String sql = "INSERT INTO EMPLOYEES " + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
@@ -83,14 +87,7 @@ public class DAManager {
 
 			pstmt.setString(3, emp.getLastName());
 			pstmt.setString(4, emp.getEmail());
-			// String phone = emp.getPhoneNumber()
-			// pstmt.setNull(5, Types.NULL);
-
-			/*
-			 * pstmt.setNull(6, Types.NULL); pstmt.setNull(7, Types.NULL);
-			 * pstmt.setNull(8, Types.NULL); pstmt.setNull(9, Types.NULL);
-			 * pstmt.setNull(10,Types.NULL);
-			 */
+			
 			pstmt.setString(5, emp.getPhoneNumber());
 			pstmt.setDate(6, emp.getHireDate());
 			pstmt.setString(7, emp.getJobId());
@@ -259,15 +256,17 @@ public class DAManager {
 
 	public static Employee getEmployeeByID(int empid) {
 		Employee newEmp = new Employee();
-		Connection conn=null;
-		OracleCallableStatement ostmt=null;
-		ResultSet rset =null;
+		OracleConnection oracleConnection = null;
+		OracleCallableStatement ostmt = null;
+		ResultSet rset = null;
 		try {
-			// DBUtil dbUtil = new DBUtil();
-			conn = DBUtil.getConnection();
-
-			ostmt = (OracleCallableStatement) conn
-					.prepareCall("{call P_SECURITY.P_EMP_INFO(?,?)}");
+			if (conn == null) {
+				conn = ConnectionPool.getInstance().getConnection();
+			}
+			if (conn.isWrapperFor(OracleConnection.class)) {
+		        oracleConnection = conn.unwrap(OracleConnection.class);
+		    }else {oracleConnection = (OracleConnection )conn;}
+			ostmt = (OracleCallableStatement) oracleConnection.prepareCall("{call P_SECURITY.P_EMP_INFO(?,?)}");
 			ostmt.setInt(1, empid);
 			ostmt.registerOutParameter(2, OracleTypes.CURSOR);
 			ostmt.execute();
@@ -296,7 +295,7 @@ public class DAManager {
 
 		} catch (Exception ex) {
 			System.err.println("Failed to add employee :" + ex.toString());
-		}finally {
+		} finally {
 			if (rset != null) {
 				try {
 					rset.close();
@@ -311,13 +310,13 @@ public class DAManager {
 					DBUtil.printSQLException(e);
 				}
 			}
-			if (conn != null) {
+			/*if (conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException e) {
 					DBUtil.printSQLException(e);
 				}
-			}
+			}*/
 		}
 		return newEmp;
 	}
@@ -389,8 +388,8 @@ public class DAManager {
 
 	public static int deleteEmployeeByID(int empid) {
 		int result = -1;
-		Connection conn=null;
-		Statement stmt=null;
+		Connection conn = null;
+		Statement stmt = null;
 		try {
 			// DBUtil dbUtil = new DBUtil();
 			conn = DBUtil.getConnection();
@@ -401,7 +400,6 @@ public class DAManager {
 			result = stmt.executeUpdate(sql);
 			SQLWarning w = stmt.getWarnings();
 			DBUtil.printWarnings(w);
-			
 
 		} catch (BatchUpdateException batchEx) {
 			DBUtil.printBatchUpdateException(batchEx);
@@ -411,7 +409,7 @@ public class DAManager {
 		} catch (Exception ex) {
 			System.err.println("Failed to add employee :" + ex.toString());
 		} finally {
-			
+
 			if (stmt != null) {
 				try {
 					stmt.close();
@@ -432,8 +430,8 @@ public class DAManager {
 
 	public static boolean batchUpdate(String[] SQLs) {
 		boolean result = false;
-		Connection conn=null;
-		Statement stmt=null;
+		Connection conn = null;
+		Statement stmt = null;
 		try {
 			// DBUtil dbUtil = new DBUtil();
 			conn = DBUtil.getConnection();
@@ -451,7 +449,7 @@ public class DAManager {
 			}
 			SQLWarning w = stmt.getWarnings();
 			DBUtil.printWarnings(w);
-			
+
 		} catch (BatchUpdateException batchEx) {
 			DBUtil.printBatchUpdateException(batchEx);
 		} catch (SQLException sqlEx) {
@@ -459,7 +457,7 @@ public class DAManager {
 
 		} catch (Exception ex) {
 			System.err.println("Failed to add employee :" + ex.toString());
-		}finally {			
+		} finally {
 			if (stmt != null) {
 				try {
 					stmt.close();

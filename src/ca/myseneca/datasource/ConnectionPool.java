@@ -14,7 +14,7 @@ public class ConnectionPool {
 		try {
 			InitialContext ic = new InitialContext();
 			dataSource = (DataSource) ic
-					.lookup("java:/comp/env/jdbc/oracle_dbj565_151a20");;
+					.lookup("java:/comp/env/jdbc/oracle_cjv805_161a19");;
 		} catch (NamingException e) {
 			System.out.println("Error in construct:"+e);
 		}
