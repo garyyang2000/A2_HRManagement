@@ -37,18 +37,20 @@
   <h2>Employee List Page</h2>
   <h5>Show employees in a department by typing in the department id and click on the button next, or click on the <i>Show All Employee</i> for all employees in the company.</h5>
   <hr>
-  
+  <div class="form-group">
   <form role="form" action="ReadCountries">
 	  <button type="submit" class="btn btn-default">
 	    Retrieve Countries from Oracle DB
      </button>
   </form>
-
+</div>
+<div class="form-group">
   <form role="form" action="RetrieveCoffees">
      <button type="submit" class="btn btn-default">
        Retrieve Coffees from MySQL DB
      </button>
   </form>
+  </div>
 
   <hr>
   <footer>
