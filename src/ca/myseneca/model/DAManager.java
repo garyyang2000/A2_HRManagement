@@ -70,11 +70,9 @@ public class DAManager {
 	}
 
 	public static void addEmployee(Employee emp) {
-		Connection conn = null;
+		
 		PreparedStatement pstmt = null;
-		try {
-			
-			conn = DBUtil.getConnection();
+		try {						
 			String sql = "INSERT INTO EMPLOYEES " + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, emp.getEmployeeId());
@@ -115,13 +113,13 @@ public class DAManager {
 					DBUtil.printSQLException(e);
 				}
 			}
-			if (conn != null) {
+			/*if (conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException e) {
 					DBUtil.printSQLException(e);
 				}
-			}
+			}*/
 		}
 
 	}
@@ -253,7 +251,7 @@ public class DAManager {
 	}
 
 	public static Employee getEmployeeByID(int empid) {
-		Employee newEmp = new Employee();
+		Employee newEmp = null;
 		OracleConnection oracleConnection = null;
 		OracleCallableStatement ostmt = null;
 		ResultSet rset = null;
@@ -322,14 +320,9 @@ public class DAManager {
 	public static int updateEmployee(Employee emp) {
 		int result = -1;
 		ResultSet uprs = null;
-		Connection conn = null;
+		
 		PreparedStatement pstmt = null;
-		try {
-			// DBUtil dbUtil = new DBUtil();
-			conn = DBUtil.getConnection();
-			// Statement stmt =
-			// conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-			// ResultSet.CONCUR_UPDATABLE);
+		try {		
 
 			String sql = "SELECT EMPLOYEE_ID, FIRST_NAME,LAST_NAME, EMAIL,PHONE_NUMBER,HIRE_DATE, JOB_ID,SALARY,COMMISSION_PCT,MANAGER_ID,DEPARTMENT_ID   FROM EMPLOYEES WHERE EMPLOYEE_ID= ?";
 			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -373,13 +366,13 @@ public class DAManager {
 					DBUtil.printSQLException(e);
 				}
 			}
-			if (conn != null) {
+			/*if (conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException e) {
 					DBUtil.printSQLException(e);
 				}
-			}
+			}*/
 		}
 		return result;
 	}
