@@ -10,7 +10,7 @@ public class ConnectionPool {
 	private static ConnectionPool pool = null;
 	private static DataSource dataSource = null;
  
-	public ConnectionPool() {
+	private ConnectionPool() {
 		try {
 			InitialContext ic = new InitialContext();
 			dataSource = (DataSource) ic
