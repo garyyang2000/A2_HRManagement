@@ -53,14 +53,13 @@
    <p>To return the login page, click on the Back button in your
    browser or the Return button shown below.</p>
    
-   <form action="index.html" method="get">
+   <form action="index.html" >
       <input type="submit" value="Return">
    </form>
 	
 	<hr />
 	<footer>
-	   <p>&copy; <fmt:formatDate pattern="yyyy" value="${now}"/> 
-	        CJV805/DBJ565/DPS904 </p>
+	   <p>&copy; Seneca College CJV805 </p>
 	</footer>
 </div>
 </body>

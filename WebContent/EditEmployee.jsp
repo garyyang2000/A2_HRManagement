@@ -126,10 +126,10 @@
 					<td class="col-md-2"></td>
 					<td class="col-md-5"><div class="form-group">
 							<div class="form-group">
-								<button type="submit" class="btn btn-success col-sm-3">Update</button>
+								<button type="submit" name="btnEdit" value="Update" class="btn btn-success col-sm-3">Update</button>
 							</div>
 							<div class="form-group">
-								<button type="cancel" class="btn btn-warning col-sm-3">Delete</button>
+								<button type="submit" name="btnEdit" value="Delete" class="btn btn-warning col-sm-3">Delete</button>
 							</div>
 						</div></td>
 				</tr>

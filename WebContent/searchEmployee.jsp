@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Employee List</title>
+<title>Search Employee</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
 <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -18,9 +18,9 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Employee List</a></li>
+						<li><a href="employeeList.jsp">Employee List</a></li>
 						<li><a href="addEmployee.jsp">New Employee</a></li>
-						<li><a href="searchEmployee.jsp">Search Employee</a></li>
+						<li class="active"><a href="#">Search Employee</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#">${emp.firstName} ${emp.lastName}</a></li>
@@ -34,36 +34,18 @@
 		</nav>
 		<div class="container  body-content">
 
-			<h2>Employee List Page</h2>
-			<h5>
-				Show employees in a department by typing in the department id and
-				click on the button next, or click on the <i>Show All Employee</i>
-				for all employees in the company.
-			</h5>
+			<h2>Search For Employee</h2>
+			<h5>Search for an employee by typing in any part of name, email
+				address, phone number or department.</h5>
 			<hr>
-			<form role="form" action="GetEmployeeList" method="POST">
+			<form role="form" action="SearchEmployees" method="POST" class="form-inline">
 				<div class="form-group">
-					<label for="Department ID" class="col-sm-2 control-label">Department
-						ID</label>
-					<div class="col-sm-6">
-						<input type="text" class="form-control" id="DeptID"
-							placeholder="Department ID" name="DeptID">
-					</div>
+					
+					<input type="text" class="form-control"
+						id="keyWord" name="keyWord" placeholder="Search here...">
 				</div>
-
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-6">
-						<button type="submit" class="btn btn-default" name="btnEmps" value="DeptEmps">Show
-							Department Employees</button>
-					</div>
-				</div>
-			
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default" name="btnEmps" value="AllEmps">Show All
-							Employees</button>
-					</div>
-				</div>
+				
+				<button type="submit" class="btn btn-default">Search</button>
 			</form>
 			<hr>
 

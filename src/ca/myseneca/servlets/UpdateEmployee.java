@@ -36,6 +36,8 @@ public class UpdateEmployee extends HttpServlet {
 		// response.getWriter().append("Served at:
 		// ").append(request.getContextPath());
 		String url = "";
+		String btn = request.getParameter("btnEdit");
+
 		String strEmpId = request.getParameter("empId");
 
 		String fName = request.getParameter("firstName");
@@ -51,6 +53,7 @@ public class UpdateEmployee extends HttpServlet {
 		Employee emp = new Employee();
 		try {
 			int empId = Integer.parseInt(strEmpId);
+
 			if ((strSalary != null) && (!strSalary.isEmpty())) {
 				BigDecimal salary = new BigDecimal(strSalary);
 				emp.setSalary(salary);
@@ -69,17 +72,39 @@ public class UpdateEmployee extends HttpServlet {
 			emp.setLastName(lName);
 			emp.setEmail(email);
 			emp.setPhoneNumber(phoneNum);
-			emp.setJob(jobId);		
-			
+			emp.setJob(jobId);
+
 			emp.setDepartmentId(departmentId);
 			SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
 			java.util.Date date = sdf1.parse(hireDate);
 			java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
 			emp.setHireDate(sqlStartDate);
-			DAManager.updateEmployee(emp);
-			request.setAttribute("emp", emp);
-			url = "/confirmation.jsp";
+			String message="";
+			if (btn.equals("Update")) {
+				if (DAManager.updateEmployee(emp) > 0) {
+					request.setAttribute("emp", emp);
+					message="The following employee information has been updated to the database.";
+					request.setAttribute("message",message);
+					url = "/confirmation.jsp";
+				} else {
+					message="Failed to update to the database, please check your input and try again.";
+					request.setAttribute("message",message);
+					url = "/errorPage.jsp";
+				}
+			} else {
+				if (DAManager.deleteEmployeeByID(empId) > 0) {
+					request.setAttribute("emp", emp);
+					message="The following employee information has been deleted from database.";
+					request.setAttribute("message",message);
+					url = "/confirmation.jsp";
+				} else {
+					message="Failed to update to the database, please check your input and try again.";
+					request.setAttribute("message",message);
+					url = "/errorPage.jsp";
+				}
+			}
 		} catch (Exception ex) {
+			
 			url = "/errorPage.jsp";
 		}
 		this.getServletContext().getRequestDispatcher(url).forward(request, response);

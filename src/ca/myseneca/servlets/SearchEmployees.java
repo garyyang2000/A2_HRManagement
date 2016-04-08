@@ -1,25 +1,25 @@
 package ca.myseneca.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import ca.myseneca.model.*;
-
 /**
- * Servlet implementation class GetEmployeeList
+ * Servlet implementation class SearchEmployees
  */
-@WebServlet(description = "Get all employee or employee from certain department", urlPatterns = { "/GetEmployeeList" })
-public class GetEmployeeList extends HttpServlet {
+@WebServlet("/SearchEmployees")
+public class SearchEmployees extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetEmployeeList() {
+    public SearchEmployees() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,34 +29,20 @@ public class GetEmployeeList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		String keyWord=request.getParameter("keyWord");
 		String url="";
-		String btn=request.getParameter("btnEmps");
-		if (btn == null) {
-		    //no button has been selected
-			url="/errorPage.jsp";
-		} else if (btn.equals("AllEmps")) {
-		    //All employees button was pressed
+		if (keyWord!=null && (!keyWord.isEmpty())){
 			ArrayList<Employee> employees= new ArrayList<Employee>();
-			employees=DAManager.getAllEmployees();
+			employees=DAManager.searchEmployee(keyWord);
 			request.setAttribute("employeeList", employees);
-			url="/showEmployeeList.jsp";
-		} else if (btn.equals("DeptEmps")) {
-		    //update button was pressed
-			String deptID=request.getParameter("DeptID");
-			int deptId=Integer.parseInt(deptID);
-			ArrayList<Employee> employees= new ArrayList<Employee>();
-			employees=DAManager.getEmployeesByDepartmentID(deptId);
-			request.setAttribute("employeeList", employees);
-			url="/showEmployeeList.jsp";
 			
-		} else {
-		    //someone has altered the HTML and sent a different value!
-			url="/errorPage.jsp";
+			url="/searchResult.jsp";
+		}else{
+			url="/searchEmployee.jsp";
 		}
-		
-
 		this.getServletContext().getRequestDispatcher(url)
-				.forward(request, response);
+		.forward(request, response);	
 	}
 
 	/**

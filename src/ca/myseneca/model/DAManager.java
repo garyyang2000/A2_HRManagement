@@ -69,8 +69,8 @@ public class DAManager {
 		return result;
 	}
 
-	public static void addEmployee(Employee emp) {
-		
+	public static boolean addEmployee(Employee emp) {
+		boolean result=false;
 		PreparedStatement pstmt = null;
 		try {						
 			String sql = "INSERT INTO EMPLOYEES " + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
@@ -97,13 +97,16 @@ public class DAManager {
 			pstmt.executeUpdate();
 			SQLWarning w = pstmt.getWarnings();
 			DBUtil.printWarnings(w);
+			result=true;
 
 		} catch (BatchUpdateException batchEx) {
 			DBUtil.printBatchUpdateException(batchEx);
+			result=false;
 		} catch (SQLException sqlEx) {
 			DBUtil.printSQLException(sqlEx);
-
+			result=false;
 		} catch (Exception ex) {
+			result=false;
 			System.err.println("Failed to add employee :" + ex.toString());
 		} finally {
 			if (pstmt != null) {
@@ -121,7 +124,7 @@ public class DAManager {
 				}
 			}*/
 		}
-
+		return result;
 	}
 
 	public static ArrayList<Employee> getAllEmployees() {
@@ -187,13 +190,10 @@ public class DAManager {
 	}
 
 	public static ArrayList<Employee> getEmployeesByDepartmentID(int depid) {
-		ArrayList<Employee> allEmps = new ArrayList<Employee>();
-		
+		ArrayList<Employee> allEmps = new ArrayList<Employee>();		
 		Statement stmt = null;
 		ResultSet rset = null;
-		try {
-
-			conn = DBUtil.getConnection();
+		try {			
 			stmt = conn.createStatement();
 			String sql = "SELECT * FROM EMPLOYEES WHERE DEPARTMENT_ID=" + depid;
 			stmt.executeUpdate(sql);
@@ -239,13 +239,13 @@ public class DAManager {
 					DBUtil.printSQLException(e);
 				}
 			}
-			if (conn != null) {
+			/*if (conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException e) {
 					DBUtil.printSQLException(e);
 				}
-			}
+			}*/
 		}
 		return allEmps;
 	}
@@ -330,7 +330,6 @@ public class DAManager {
 
 			uprs = pstmt.executeQuery();
 			if (uprs.next()) {
-
 				uprs.updateString("FIRST_NAME", emp.getFirstName());
 				uprs.updateString("LAST_NAME", emp.getLastName());
 				uprs.updateString("EMAIL", emp.getEmail());
@@ -343,9 +342,7 @@ public class DAManager {
 				uprs.updateInt("DEPARTMENT_ID", emp.getDepartmentId());
 				uprs.updateRow();
 				result = 1;
-
 			}
-
 			SQLWarning w = pstmt.getWarnings();
 			DBUtil.printWarnings(w);
 
@@ -379,12 +376,10 @@ public class DAManager {
 
 	public static int deleteEmployeeByID(int empid) {
 		int result = -1;
-		Connection conn = null;
+		
 		Statement stmt = null;
 		try {
-			// DBUtil dbUtil = new DBUtil();
-			conn = DBUtil.getConnection();
-
+			
 			String sql = "DELETE FROM EMPLOYEES WHERE EMPLOYEE_ID=" + empid;
 			stmt = conn.createStatement();
 
@@ -408,24 +403,90 @@ public class DAManager {
 					DBUtil.printSQLException(e);
 				}
 			}
-			if (conn != null) {
+			/*if (conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException e) {
 					DBUtil.printSQLException(e);
 				}
-			}
+			}*/
 		}
 		return result;
 	}
 
+	public static ArrayList<Employee> searchEmployee(String keyword) {
+		ArrayList<Employee> allEmps = new ArrayList<Employee>();		
+		PreparedStatement  stmt = null;
+		ResultSet rset = null;
+		try {			
+			
+			String sql = "SELECT * FROM EMPLOYEES WHERE DEPARTMENT_ID LIKE ? OR FIRST_NAME LIKE ? OR LAST_NAME LIKE ? OR PHONE_NUMBER LIKE ? OR EMAIL LIKE ?" ;
+			stmt = conn.prepareStatement(sql);
+			keyword="%"+keyword+"%";
+			stmt.setString(1, keyword);
+			stmt.setString(2, keyword);
+			stmt.setString(3, keyword);
+			stmt.setString(4, keyword);
+			stmt.setString(5, keyword);
+			stmt.executeQuery();
+			SQLWarning w = stmt.getWarnings();
+			DBUtil.printWarnings(w);
+			rset = stmt.getResultSet();
+			while (rset.next()) {
+				int empId = rset.getInt(1);
+				String fName = rset.getString(2);
+				String lName = rset.getString(3);
+				String email = rset.getString(4);
+				String phone = rset.getString(5);
+				Date hrDate = rset.getDate(6);
+				String jobID = rset.getString(7);
+				BigDecimal sal = rset.getBigDecimal(8);
+				BigDecimal commiPct = rset.getBigDecimal(9);
+				int mgrID = rset.getInt(10);
+				int deptID = rset.getInt(11);
+				Employee newEmp = new Employee(empId, fName, lName, email, phone, hrDate, jobID, sal, commiPct, mgrID,
+						deptID);
+				allEmps.add(newEmp);
+
+			}
+
+		} catch (BatchUpdateException batchEx) {
+			DBUtil.printBatchUpdateException(batchEx);
+		} catch (SQLException sqlEx) {
+			DBUtil.printSQLException(sqlEx);
+		} catch (Exception ex) {
+			System.err.println("Failed to add employee :" + ex.toString());
+		} finally {
+			if (rset != null) {
+				try {
+					rset.close();
+				} catch (SQLException e) {
+					DBUtil.printSQLException(e);
+				}
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					DBUtil.printSQLException(e);
+				}
+			}
+			/*if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					DBUtil.printSQLException(e);
+				}
+			}*/
+		}
+		return allEmps;
+	}
 	public static boolean batchUpdate(String[] SQLs) {
 		boolean result = false;
-		Connection conn = null;
+		
 		Statement stmt = null;
 		try {
-			// DBUtil dbUtil = new DBUtil();
-			conn = DBUtil.getConnection();
+			
 			conn.setAutoCommit(false);
 			Savepoint savPnt = conn.setSavepoint("savpnt1");
 			stmt = conn.createStatement();
@@ -456,13 +517,13 @@ public class DAManager {
 					DBUtil.printSQLException(e);
 				}
 			}
-			if (conn != null) {
+			/*if (conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException e) {
 					DBUtil.printSQLException(e);
 				}
-			}
+			}*/
 		}
 		return result;
 	}
