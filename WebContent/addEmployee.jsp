@@ -20,11 +20,11 @@
 					<ul class="nav navbar-nav">
 						<li ><a href="employeeList.jsp">Employee List</a></li>
 						<li class="active"><a href="addEmployee.jsp">New Employee</a></li>
-						<li><a href="#">Search Employee</a></li>
+						<li><a href="searchEmployee.jsp">Search Employee</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#">${emp.firstName} ${emp.lastName}</a></li>
-						<li class="active"><a href="../navbar-fixed-top/"><span
+						<li class="active"><a href="index.html"><span
 								class="glyphicon glyphicon-log-out"></span></a></li>
 					</ul>
 				</div>
@@ -40,11 +40,11 @@
 			<table>
 				<tr>
 					<td class="col-md-2"><div class="form-group">
-							<label for="empid" class="control-label">Employee ID</label>
+							<label for="empid" class="control-label">Employee ID*</label>
 						</div></td>
 					<td class="col-md-5"><div class="form-group">
 							<input type="number" class="form-control" id="empId" name="empId"
-								required>*
+								required>
 						</div></td>
 				</tr>
 				<tr>
@@ -146,7 +146,7 @@
 					<td class="col-md-2"></td>
 					<td class="col-md-5"><div class="form-group">
 							<div class="form-group">
-								<button type="submit" class="btn btn-success col-sm-3">Save the new employee</button>
+								<button type="submit" class="btn btn-success col-sm-3">Save</button>
 							</div>
 							<div class="form-group">
 								<button type="reset" class="btn btn-warning col-sm-3">Clear</button>
@@ -157,5 +157,6 @@
 		</form>
 	</div>
 	</div>
+	<br/>
 </body>
 </html>

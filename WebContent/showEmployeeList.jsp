@@ -13,7 +13,7 @@
 <div class="container body-content">
 
    <h2>Employees List View</h2>
-   <p>Here is the information that you retrieved from Oracle database:</p>
+   <p>Here is ${message} :</p>
    <div class="row">
      <div class="col-md-6">
 	    <table class="table table-striped">
@@ -53,7 +53,7 @@
    <p>To return the login page, click on the Back button in your
    browser or the Return button shown below.</p>
    
-   <form action="index.html" >
+   <form action="employeeList.jsp" >
       <input type="submit" value="Return">
    </form>
 	

@@ -151,8 +151,9 @@ public class DAManager {
 				BigDecimal commiPct = rset.getBigDecimal(9);
 				int mgrID = rset.getInt(10);
 				int deptID = rset.getInt(11);
+				String deptName="";
 				Employee newEmp = new Employee(empId, fName, lName, email, phone, hrDate, jobID, sal, commiPct, mgrID,
-						deptID);
+						deptID,deptName);
 				allEmps.add(newEmp);
 			}
 
@@ -195,7 +196,15 @@ public class DAManager {
 		ResultSet rset = null;
 		try {			
 			stmt = conn.createStatement();
-			String sql = "SELECT * FROM EMPLOYEES WHERE DEPARTMENT_ID=" + depid;
+			String deptName="";
+			String sql= "SELECT DEPARTMENT_NAME FROM DEPARTMENTS WHERE DEPARTMENT_ID="+depid;
+			stmt.executeUpdate(sql);
+			rset = stmt.getResultSet();
+			while (rset.next()) {
+				deptName=rset.getString(1);
+			}
+			rset.close();
+			sql = "SELECT * FROM EMPLOYEES WHERE DEPARTMENT_ID=" + depid;
 			stmt.executeUpdate(sql);
 			SQLWarning w = stmt.getWarnings();
 			DBUtil.printWarnings(w);
@@ -213,7 +222,7 @@ public class DAManager {
 				int mgrID = rset.getInt(10);
 				int deptID = rset.getInt(11);
 				Employee newEmp = new Employee(empId, fName, lName, email, phone, hrDate, jobID, sal, commiPct, mgrID,
-						deptID);
+						deptID,deptName);
 				allEmps.add(newEmp);
 
 			}
@@ -281,7 +290,8 @@ public class DAManager {
 				BigDecimal commiPct = rset.getBigDecimal(9);
 				int mgrID = rset.getInt(10);
 				int deptID = rset.getInt(11);
-				newEmp = new Employee(empId, fName, lName, email, phone, hrDate, jobID, sal, commiPct, mgrID, deptID);
+				String deptName="";
+				newEmp = new Employee(empId, fName, lName, email, phone, hrDate, jobID, sal, commiPct, mgrID, deptID,deptName);
 			}
 
 		} catch (BatchUpdateException batchEx) {
@@ -420,7 +430,13 @@ public class DAManager {
 		ResultSet rset = null;
 		try {			
 			
-			String sql = "SELECT * FROM EMPLOYEES WHERE DEPARTMENT_ID LIKE ? OR FIRST_NAME LIKE ? OR LAST_NAME LIKE ? OR PHONE_NUMBER LIKE ? OR EMAIL LIKE ?" ;
+			String sql = "Select e.EMPLOYEE_ID, e.FIRST_NAME, e.LAST_NAME, e.EMAIL,"
+						+" e.PHONE_NUMBER, e.HIRE_DATE , e.JOB_ID , e.SALARY, "
+						+"e.COMMISSION_PCT,  e.MANAGER_ID    , e.DEPARTMENT_ID,d.DEPARTMENT_NAME "
+						+"FROM  EMPLOYEES  e INNER JOIN DEPARTMENTS  d ON (e.department_id=d.department_id)"
+						+"WHERE e.DEPARTMENT_ID LIKE ? "
+						+"OR e.FIRST_NAME LIKE ? OR e.LAST_NAME LIKE ?"
+						+" OR e.PHONE_NUMBER LIKE ? OR e.EMAIL LIKE ?" ;
 			stmt = conn.prepareStatement(sql);
 			keyword="%"+keyword+"%";
 			stmt.setString(1, keyword);
@@ -442,10 +458,12 @@ public class DAManager {
 				String jobID = rset.getString(7);
 				BigDecimal sal = rset.getBigDecimal(8);
 				BigDecimal commiPct = rset.getBigDecimal(9);
+				
 				int mgrID = rset.getInt(10);
 				int deptID = rset.getInt(11);
+				String deptName=rset.getString(12);
 				Employee newEmp = new Employee(empId, fName, lName, email, phone, hrDate, jobID, sal, commiPct, mgrID,
-						deptID);
+						deptID,deptName);
 				allEmps.add(newEmp);
 
 			}

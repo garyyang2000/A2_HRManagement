@@ -32,6 +32,7 @@ public class AddEmployee extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String url = "";
+		String message="";
 		String strEmpId = request.getParameter("empId");
 
 		String fName = request.getParameter("firstName");
@@ -74,6 +75,8 @@ public class AddEmployee extends HttpServlet {
 			emp.setHireDate(sqlStartDate);
 			DAManager.addEmployee(emp);
 			request.setAttribute("emp", emp);
+			message="The following employee information has been added to the database.";
+			request.setAttribute("message", message);
 			url = "/confirmation.jsp";
 		} catch (Exception ex) {
 			url = "/errorPage.jsp";

@@ -31,6 +31,7 @@ public class GetEmployeeList extends HttpServlet {
 		// TODO Auto-generated method stub
 		String url="";
 		String btn=request.getParameter("btnEmps");
+		String message= "";
 		if (btn == null) {
 		    //no button has been selected
 			url="/errorPage.jsp";
@@ -39,6 +40,8 @@ public class GetEmployeeList extends HttpServlet {
 			ArrayList<Employee> employees= new ArrayList<Employee>();
 			employees=DAManager.getAllEmployees();
 			request.setAttribute("employeeList", employees);
+			message="employee information of all employees";
+			request.setAttribute("message", message);
 			url="/showEmployeeList.jsp";
 		} else if (btn.equals("DeptEmps")) {
 		    //update button was pressed
@@ -46,7 +49,13 @@ public class GetEmployeeList extends HttpServlet {
 			int deptId=Integer.parseInt(deptID);
 			ArrayList<Employee> employees= new ArrayList<Employee>();
 			employees=DAManager.getEmployeesByDepartmentID(deptId);
+			String deptName="";
+			if (employees.size()>0){
+				deptName=employees.get(0).getDeptName();
+			}
 			request.setAttribute("employeeList", employees);
+			message="employee information of "+deptName+ " department";
+			request.setAttribute("message", message);
 			url="/showEmployeeList.jsp";
 			
 		} else {

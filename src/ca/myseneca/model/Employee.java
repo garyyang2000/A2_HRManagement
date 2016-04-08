@@ -35,12 +35,21 @@ public class Employee implements Serializable {
 	private BigDecimal salary;
 	private int departmentId;
 	private String jobId;
+	private String deptName;
+	
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
 
 	public Employee() {
 	}
 
 	public Employee(int empID, String fname, String lname, String email, String phone, Date hrDate, String jobid,
-			BigDecimal sal, BigDecimal commPct, int mgrid, int deptid) {
+			BigDecimal sal, BigDecimal commPct, int mgrid, int deptid, String deptName) {
 		this.employeeId=empID;
 		this.firstName=fname;
 		this.lastName= lname;
@@ -52,6 +61,7 @@ public class Employee implements Serializable {
 		this.commissionPct=commPct;
 		this.managerId=mgrid;
 		this.departmentId=deptid;
+		this.deptName=deptName;
 		
 	}
 

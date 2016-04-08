@@ -28,10 +28,10 @@
 	          <c:forEach var="employee" items="${employeeList}" >
            <tr>
              <td><c:out value="${employee.firstName}"/> <c:out value="${employee.lastName}"/></td>
-             <td><c:out value="${employee.departmentId}"/></td>
+             <td><c:out value="${employee.deptName}"/></td>
              <td><c:out value="${employee.jobId}"/></td>
              <td><c:out value="${employee.salary}"/></td>
-             <td><c:out value="${employee.email}"/></td>
+             <td><a href="mailto:<c:out value="${employee.email}"/>@myseneca.ca"><c:out value="${employee.email}"/>@myseneca.ca</td>
              <td><c:out value="${employee.phoneNumber}"/></td>
              
            </tr> 
