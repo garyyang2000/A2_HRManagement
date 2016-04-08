@@ -21,7 +21,7 @@
 						</div></td>
 					<td class="col-md-5"><div class="form-group">
 							<input type="number" class="form-control" id="empId" name="empId"
-								value=${emp.employeeId} required disabled>*
+								value=${emp.employeeId} required readonly>*
 						</div></td>
 				</tr>
 				<tr>
