@@ -15,7 +15,7 @@
 	<div class="container body-content">
 	
 	<h2>Confirmation</h2>
-   <p>The following employee information has been updated:</p>
+   <p>${message}</p>
   
    <form action="employeeList.jsp" method="POST">
    <table >
