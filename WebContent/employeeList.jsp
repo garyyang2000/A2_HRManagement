@@ -24,7 +24,7 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#">${emp.firstName} ${emp.lastName}</a></li>
-						<li class="active"><a href="../navbar-fixed-top/"><span
+						<li class="active"><a href="index.html"><span
 								class="glyphicon glyphicon-log-out"></span></a></li>
 					</ul>
 				</div>
@@ -53,24 +53,27 @@
 
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-6">
-						<button type="submit" class="btn btn-default" name="btnEmps" value="DeptEmps">Show
-							Department Employees</button>
+						<button type="submit" class="btn btn-default" name="btnEmps"
+							value="DeptEmps">Show Department Employees</button>
 					</div>
 				</div>
-			
+
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default" name="btnEmps" value="AllEmps">Show All
-							Employees</button>
+						<button type="submit" class="btn btn-default" name="btnEmps"
+							value="AllEmps">Show All Employees</button>
 					</div>
 				</div>
 			</form>
-			<hr>
+		
 
 		</div>
-		<footer>
-			<p>&copy; Seneca College CJV805</p>
-		</footer>
+			<hr>
+		<div class="container text-center">
+			<footer>
+				<p>&copy; Seneca College CJV805</p>
+			</footer>
+		</div>
 	</div>
 	<!-- /container -->
 </body>

@@ -17,11 +17,11 @@
 			<table>
 				<tr>
 					<td class="col-md-2"><div class="form-group">
-							<label for="empid" class="control-label">Employee ID</label>
+							<label for="empid" class="control-label">Employee ID*</label>
 						</div></td>
 					<td class="col-md-5"><div class="form-group">
 							<input type="number" class="form-control" id="empId" name="empId"
-								value=${emp.employeeId} required readonly>*
+								value=${emp.employeeId } required readonly>
 						</div></td>
 				</tr>
 				<tr>
@@ -117,24 +117,33 @@
 							<label for="deptId" class="control-label">Department ID</label>
 						</div></td>
 					<td class="col-md-5"><div class="form-group">
-							<input type="number" class="form-control" id="deptId" name="deptId"
-								value=${emp.departmentId}>
+							<input type="number" class="form-control" id="deptId"
+								name="deptId" value=${emp.departmentId}>
 						</div></td>
 				</tr>
 
 				<tr>
 					<td class="col-md-2"></td>
-					<td class="col-md-5"><div class="form-group">
+					<td class="col-md-5"><div class="form-group pull-right">
 							<div class="form-group">
-								<button type="submit" name="btnEdit" value="Update" class="btn btn-success col-sm-3">Update</button>
-							</div>
-							<div class="form-group">
-								<button type="submit" name="btnEdit" value="Delete" class="btn btn-warning col-sm-3">Delete</button>
+								<button type="submit" name="btnEdit" value="Update"
+									class="btn btn-success ">Update</button>
+							
+								<button type="submit" name="btnEdit" value="Delete"
+									class="btn btn-warning ">Delete</button>
 							</div>
 						</div></td>
 				</tr>
 			</table>
 		</form>
+	
+		
 	</div>
+	<hr/>
+<div class="container text-center">
+			<footer>
+				<p>&copy; Seneca College CJV805</p>
+			</footer>
+		</div>
 </body>
 </html>

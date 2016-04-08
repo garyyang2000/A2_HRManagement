@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,7 +32,14 @@
              <td><c:out value="${employee.deptName}"/></td>
              <td><c:out value="${employee.jobId}"/></td>
              <td><c:out value="${employee.salary}"/></td>
+             <c:choose>
+            <c:when test="${fn:contains(employee.email, '@')}">
+  				 <td><a href="mailto:<c:out value="${employee.email}"/>"><c:out value="${employee.email}"/></td>
+			</c:when>
+			<c:otherwise>
              <td><a href="mailto:<c:out value="${employee.email}"/>@myseneca.ca"><c:out value="${employee.email}"/>@myseneca.ca</td>
+             </c:otherwise>
+             </c:choose>
              <td><c:out value="${employee.phoneNumber}"/></td>
              
            </tr> 
@@ -39,10 +47,11 @@
 	    </table>
 	  </div>
 	</div>    
-<footer>
-	   <p>&copy; <fmt:formatDate pattern="yyyy" value="${now}"/> 
-	        CJV805/DBJ565/DPS904 </p>
-	</footer>
+	<hr/>
+<div class="container text-center">
+	<footer>
+	   <p>&copy; Seneca College CJV805 </p>
+	</footer></div>
 </div>
 </body>
 </html>

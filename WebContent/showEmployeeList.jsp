@@ -58,9 +58,10 @@
    </form>
 	
 	<hr />
+	<div class="container text-center">
 	<footer>
 	   <p>&copy; Seneca College CJV805 </p>
-	</footer>
+	</footer></div>
 </div>
 </body>
 </html>

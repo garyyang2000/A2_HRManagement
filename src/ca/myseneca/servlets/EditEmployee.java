@@ -1,6 +1,8 @@
 package ca.myseneca.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,8 +33,10 @@ public class EditEmployee extends HttpServlet {
 		String strEmpID = request.getParameter("id");
 		int empID = Integer.parseInt(strEmpID);
 		Employee emp=DAManager.getEmployeeByID(empID);
+		ArrayList<Department> depts=DAManager.getAllDepartments();
 		if (emp!=null){
 			request.setAttribute("emp", emp);
+			request.setAttribute("departments", depts);
 			url="/EditEmployee.jsp";
 		}
 		else{ url="/errorPage.jsp";}

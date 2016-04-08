@@ -24,7 +24,7 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#">${emp.firstName} ${emp.lastName}</a></li>
-						<li class="active"><a href="../navbar-fixed-top/"><span
+						<li class="active"><a href="index.html"><span
 								class="glyphicon glyphicon-log-out"></span></a></li>
 					</ul>
 				</div>
@@ -38,21 +38,24 @@
 			<h5>Search for an employee by typing in any part of name, email
 				address, phone number or department.</h5>
 			<hr>
-			<form role="form" action="SearchEmployees" method="POST" class="form-inline">
+			<form role="form" action="SearchEmployees" method="POST"
+				class="form-inline">
 				<div class="form-group">
-					
-					<input type="text" class="form-control"
-						id="keyWord" name="keyWord" placeholder="Search here...">
+
+					<input type="text" class="form-control" id="keyWord" name="keyWord"
+						placeholder="Search here...">
 				</div>
-				
+
 				<button type="submit" class="btn btn-default">Search</button>
 			</form>
 			<hr>
 
 		</div>
-		<footer>
-			<p>&copy; Seneca College CJV805</p>
-		</footer>
+		<div class="container text-center">
+			<footer>
+				<p>&copy; Seneca College CJV805</p>
+			</footer>
+		</div>
 	</div>
 	<!-- /container -->
 </body>
