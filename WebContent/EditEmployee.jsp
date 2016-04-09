@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,11 +115,16 @@
 				</tr>
 				<tr>
 					<td class="col-md-2"><div class="form-group">
-							<label for="deptId" class="control-label">Department ID</label>
+							<label for="deptId" class="control-label">Department</label>
 						</div></td>
 					<td class="col-md-5"><div class="form-group">
-							<input type="number" class="form-control" id="deptId"
-								name="deptId" value=${emp.departmentId}>
+							<select name="deptId" class="form-control" >
+								<c:forEach items="${departments}" var="dept">
+									<option value="${dept.deptId}"
+										selected=${dept.deptId == emp.departmentId ? 'selected' : ''}>${dept.deptName}
+										</option>
+								</c:forEach>
+							</select> 
 						</div></td>
 				</tr>
 
@@ -128,7 +134,7 @@
 							<div class="form-group">
 								<button type="submit" name="btnEdit" value="Update"
 									class="btn btn-success ">Update</button>
-							
+
 								<button type="submit" name="btnEdit" value="Delete"
 									class="btn btn-warning ">Delete</button>
 							</div>
@@ -136,14 +142,18 @@
 				</tr>
 			</table>
 		</form>
-	
-		
+
+
 	</div>
-	<hr/>
-<div class="container text-center">
-			<footer>
-				<p>&copy; Seneca College CJV805</p>
-			</footer>
-		</div>
+	<hr />
+	<div class="container text-center">
+		<footer>
+			<p>&copy;<script>
+					document.write(new Date().getFullYear())
+				</script> Seneca College
+				
+				CJV805</p>
+		</footer>
+	</div>
 </body>
 </html>
