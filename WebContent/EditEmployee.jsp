@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +10,9 @@
 <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 <body>
+	<c:if test="${empty authUser}">
+		<c:redirect url="/index.html" />
+	</c:if>
 	<div class="container body-content">
 		<h2>Edit Employee</h2>
 		<p>Here is the information that you retrieved from Oracle
@@ -119,13 +122,13 @@
 							<label for="deptId" class="control-label">Department</label>
 						</div></td>
 					<td class="col-md-5"><div class="form-group">
-							<select name="deptId" class="form-control" >
+							<select name="deptId" class="form-control">
 								<c:forEach items="${departments}" var="dept">
 									<option value="${dept.deptId}"
 										selected=${dept.deptId == emp.departmentId ? 'selected' : ''}>${dept.deptName}
-										</option>
+									</option>
 								</c:forEach>
-							</select> 
+							</select>
 						</div></td>
 				</tr>
 
@@ -149,11 +152,13 @@
 	<hr />
 	<div class="container text-center">
 		<footer>
-			<p>&copy;<script>
+			<p>
+				&copy;
+				<script>
 					document.write(new Date().getFullYear())
-				</script> Seneca College
-				
-				CJV805</p>
+				</script>
+				Seneca College CJV805
+			</p>
 		</footer>
 	</div>
 </body>

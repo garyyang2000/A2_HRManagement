@@ -8,45 +8,59 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import ca.myseneca.model.*;
+
 /**
  * Servlet implementation class EditEmployee
  */
 @WebServlet("/EditEmployee")
 public class EditEmployee extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EditEmployee() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public EditEmployee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String url="";
-		String strEmpID = request.getParameter("id");
-		int empID = Integer.parseInt(strEmpID);
-		Employee emp=DAManager.getEmployeeByID(empID);
-		ArrayList<Department> depts=DAManager.getAllDepartments();
-		if (emp!=null){
-			request.setAttribute("emp", emp);
-			request.setAttribute("departments", depts);
-			url="/EditEmployee.jsp";
+		String url = "";
+		HttpSession session = request.getSession();
+		if (null == session.getAttribute("authUser")) {
+			url = "/index.html";
+
+		} else {
+			String strEmpID = request.getParameter("id");
+			int empID = Integer.parseInt(strEmpID);
+			Employee emp = DAManager.getEmployeeByID(empID);
+			ArrayList<Department> depts = DAManager.getAllDepartments();
+			if (emp != null) {
+				request.setAttribute("emp", emp);
+				request.setAttribute("departments", depts);
+				url = "/EditEmployee.jsp";
+			} else {
+				url = "/errorPage.jsp";
+			}
 		}
-		else{ url="/errorPage.jsp";}
 		this.getServletContext().getRequestDispatcher(url).forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

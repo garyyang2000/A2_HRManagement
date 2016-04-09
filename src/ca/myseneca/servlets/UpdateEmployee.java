@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import ca.myseneca.model.*;
 
 /**
@@ -33,79 +35,84 @@ public class UpdateEmployee extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at:
-		// ").append(request.getContextPath());
+
 		String url = "";
-		String btn = request.getParameter("btnEdit");
+		HttpSession session = request.getSession();
+		if (null == session.getAttribute("authUser")) {
+			url = "/index.html";
 
-		String strEmpId = request.getParameter("empId");
+		} else {
+			String btn = request.getParameter("btnEdit");
 
-		String fName = request.getParameter("firstName");
-		String lName = request.getParameter("lastName");
-		String email = request.getParameter("email");
-		String phoneNum = request.getParameter("phoneNum");
-		String hireDate = request.getParameter("hireDate");
-		String jobId = request.getParameter("jobId");
-		String strSalary = request.getParameter("salary");
-		String commPct = request.getParameter("commPct");
-		String managerId = request.getParameter("managerId");
-		String deptId = request.getParameter("deptId");
-		Employee emp = new Employee();
-		try {
-			int empId = Integer.parseInt(strEmpId);
+			String strEmpId = request.getParameter("empId");
 
-			if ((strSalary != null) && (!strSalary.isEmpty())) {
-				BigDecimal salary = new BigDecimal(strSalary);
-				emp.setSalary(salary);
-			}
-			if ((commPct != null) && (!commPct.isEmpty())) {
-				BigDecimal commissionPct = new BigDecimal(commPct);
-				emp.setCommissionPct(commissionPct);
-			}
-			if ((managerId != null) && (!managerId.isEmpty())) {
-				int mgrId = Integer.parseInt(managerId);
-				emp.setManagerId(mgrId);
-			}
-			int departmentId = Integer.parseInt(deptId);
-			emp.setEmployeeId(empId);
-			emp.setFirstName(fName);
-			emp.setLastName(lName);
-			emp.setEmail(email);
-			emp.setPhoneNumber(phoneNum);
-			emp.setJob(jobId);
+			String fName = request.getParameter("firstName");
+			String lName = request.getParameter("lastName");
+			String email = request.getParameter("email");
+			String phoneNum = request.getParameter("phoneNum");
+			String hireDate = request.getParameter("hireDate");
+			String jobId = request.getParameter("jobId");
+			String strSalary = request.getParameter("salary");
+			String commPct = request.getParameter("commPct");
+			String managerId = request.getParameter("managerId");
+			String deptId = request.getParameter("deptId");
+			Employee emp = new Employee();
+			try {
+				int empId = Integer.parseInt(strEmpId);
 
-			emp.setDepartmentId(departmentId);
-			SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-			java.util.Date date = sdf1.parse(hireDate);
-			java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
-			emp.setHireDate(sqlStartDate);
-			String message="";
-			if (btn.equals("Update")) {
-				if (DAManager.updateEmployee(emp) > 0) {
-					request.setAttribute("emp", emp);
-					message="The following employee information has been updated to the database.";
-					request.setAttribute("message",message);
-					url = "/confirmation.jsp";
-				} else {
-					message="Failed to update to the database, please check your input and try again.";
-					request.setAttribute("message",message);
-					url = "/errorPage.jsp";
+				if ((strSalary != null) && (!strSalary.isEmpty())) {
+					BigDecimal salary = new BigDecimal(strSalary);
+					emp.setSalary(salary);
 				}
-			} else {
-				if (DAManager.deleteEmployeeByID(empId) > 0) {
-					request.setAttribute("emp", emp);
-					message="The following employee information has been deleted from database.";
-					request.setAttribute("message",message);
-					url = "/confirmation.jsp";
-				} else {
-					message="Failed to update to the database, please check your input and try again.";
-					request.setAttribute("message",message);
-					url = "/errorPage.jsp";
+				if ((commPct != null) && (!commPct.isEmpty())) {
+					BigDecimal commissionPct = new BigDecimal(commPct);
+					emp.setCommissionPct(commissionPct);
 				}
+				if ((managerId != null) && (!managerId.isEmpty())) {
+					int mgrId = Integer.parseInt(managerId);
+					emp.setManagerId(mgrId);
+				}
+				int departmentId = Integer.parseInt(deptId);
+				emp.setEmployeeId(empId);
+				emp.setFirstName(fName);
+				emp.setLastName(lName);
+				emp.setEmail(email);
+				emp.setPhoneNumber(phoneNum);
+				emp.setJob(jobId);
+
+				emp.setDepartmentId(departmentId);
+				SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+				java.util.Date date = sdf1.parse(hireDate);
+				java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
+				emp.setHireDate(sqlStartDate);
+				String message = "";
+				if (btn.equals("Update")) {
+					if (DAManager.updateEmployee(emp) > 0) {
+						request.setAttribute("emp", emp);
+						message = "The following employee information has been updated to the database.";
+						request.setAttribute("message", message);
+						url = "/confirmation.jsp";
+					} else {
+						message = "Failed to update to the database, please check your input and try again.";
+						request.setAttribute("message", message);
+						url = "/errorPage.jsp";
+					}
+				} else {
+					if (DAManager.deleteEmployeeByID(empId) > 0) {
+						request.setAttribute("emp", emp);
+						message = "The following employee information has been deleted from database.";
+						request.setAttribute("message", message);
+						url = "/confirmation.jsp";
+					} else {
+						message = "Failed to update to the database, please check your input and try again.";
+						request.setAttribute("message", message);
+						url = "/errorPage.jsp";
+					}
+				}
+			} catch (Exception ex) {
+
+				url = "/errorPage.jsp";
 			}
-		} catch (Exception ex) {
-			
-			url = "/errorPage.jsp";
 		}
 		this.getServletContext().getRequestDispatcher(url).forward(request, response);
 	}

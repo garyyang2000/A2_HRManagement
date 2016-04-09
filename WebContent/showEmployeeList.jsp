@@ -11,7 +11,9 @@
 </head>
 <body>
 <div class="container body-content">
-
+	<c:if test="${empty authUser}">
+		<c:redirect url="/index.html" />
+	</c:if>
    <h2>Employees List View</h2>
    <p>Here is ${message} :</p>
    <div class="row">

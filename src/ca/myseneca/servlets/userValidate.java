@@ -10,13 +10,15 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.servlet.http.HttpSession;
+
 import ca.myseneca.datasource.*;
 import ca.myseneca.model.*;
 
 /**
  * Servlet implementation class userValidate
  */
-@WebServlet(description = "validate user's credential", urlPatterns = { "/userValidate" })
+@WebServlet(description = "validate user's credential", urlPatterns="/userValidate")
 public class userValidate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -41,8 +43,13 @@ public class userValidate extends HttpServlet {
 		String passWord = request.getParameter("passWord");
 		result = DAManager.getEmployeeID(userName, passWord);
 		if (result > 0) {
+			HttpSession session = request.getSession();
+			
+			// setting session to expire in 30 minutes
+			session.setMaxInactiveInterval(30 * 60);
 			Employee emp=DAManager.getEmployeeByID(result);
-			request.setAttribute("emp", emp);
+			session.setAttribute("authUser", emp);
+			
 			url = "/employeeList.jsp";
 		} else {
 			url = "/index.html";

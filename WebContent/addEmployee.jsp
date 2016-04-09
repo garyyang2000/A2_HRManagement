@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@page import="ca.myseneca.model.*"%>
 <%@page import="java.util.ArrayList"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -12,35 +13,18 @@
 <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 <body>
+	<c:if test="${empty authUser}">
+		<c:redirect url="/index.html" />
+	</c:if>
 	<div class="container">
-		<!-- Static navbar -->
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">HR Management</a>
-				</div>
-				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li><a href="employeeList.jsp">Employee List</a></li>
-						<li class="active"><a href="">New Employee</a></li>
-						<li><a href="searchEmployee.jsp">Search Employee</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">${emp.firstName} ${emp.lastName}</a></li>
-						<li class="active"><a href="logout.html"><span
-								class="glyphicon glyphicon-log-out"></span></a></li>
-					</ul>
-				</div>
-				<!--/.nav-collapse -->
-			</div>
-			<!--/.container-fluid -->
-		</nav>
+		<jsp:include page="header.jsp">
+			<jsp:param name="pageIndex" value="2" />
+		</jsp:include>
 		<div class="container body-content">
 			<h2>Add New Employee</h2>
-			<p>Here is the information that you retrieved from Oracle
-				database:</p>
-				<hr/>
+			<p>Please input new employee information:</p>
 			<hr />
+			
 			<form action="AddEmployee" method="POST">
 				<table>
 					<tr>

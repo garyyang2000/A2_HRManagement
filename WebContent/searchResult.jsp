@@ -12,7 +12,9 @@
 </head>
 <body>
 <div class="container body-content">
-
+<c:if test="${empty authUser}">
+		<c:redirect url="/index.html" />
+	</c:if>
  <h2>Search For Employee</h2>
    <p>Employee search results for input: ${keyWord}</p>
    <div class="row">

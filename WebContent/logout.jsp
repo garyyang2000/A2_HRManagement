@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +10,9 @@
 <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 <body>
+		<%
+            session.removeAttribute("authUser");
+        %>
 	<div class="container">
 
 		<h2>HR Management</h2>

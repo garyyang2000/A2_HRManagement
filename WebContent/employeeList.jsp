@@ -10,34 +10,14 @@
 <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 <body>
+	<c:if test="${empty authUser}">
+		<c:redirect url="/index.html" />
+	</c:if>
 	<div class="container">
 		<!-- Static navbar -->
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">HR Management</a>
-				</div>
-				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Employee List</a></li>
-						<li><a href="addEmployee.jsp">New Employee</a></li>
-						<li><a href="searchEmployee.jsp">Search Employee</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<c:if test="${not empty authUser}">
-							<li>${authUser.firstName}${authUser.lastName}</li>
-						</c:if>
-						<c:if test="${empty authUser}">
-							<c:redirect url="/index.html" />
-						</c:if>
-						<li class="active"><a href="logout.html"><span
-								class="glyphicon glyphicon-log-out"></span></a></li>
-					</ul>
-				</div>
-				<!--/.nav-collapse -->
-			</div>
-			<!--/.container-fluid -->
-		</nav>
+		<jsp:include page="header.jsp">
+			<jsp:param name="pageIndex" value="1" />
+		</jsp:include>
 		<div class="container  body-content">
 			<h2>Employee List Page</h2>
 			<h5>
