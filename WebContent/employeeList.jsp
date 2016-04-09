@@ -24,7 +24,7 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#">${emp.firstName} ${emp.lastName}</a></li>
-						<li class="active"><a href="index.html"><span
+						<li class="active"><a href="logout.html"><span
 								class="glyphicon glyphicon-log-out"></span></a></li>
 					</ul>
 				</div>
@@ -33,7 +33,6 @@
 			<!--/.container-fluid -->
 		</nav>
 		<div class="container  body-content">
-
 			<h2>Employee List Page</h2>
 			<h5>
 				Show employees in a department by typing in the department id and
@@ -71,7 +70,7 @@
 			<hr>
 		<div class="container text-center">
 			<footer>
-				<p>&copy; Seneca College CJV805</p>
+				<p>&copy;<script>document.write(new Date().getFullYear())</script> Seneca College CJV805 </p>
 			</footer>
 		</div>
 	</div>
