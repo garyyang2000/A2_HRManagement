@@ -33,7 +33,7 @@
 	
          <c:forEach var="employee" items="${employeeList}" >
            <tr>
-             <td><a href="EditEmployee?id=<c:out value="${employee.employeeId}"/>"><c:out value="${employee.employeeId}"/></td>
+             <td><a href="EditEmployee?id=<c:out value="${employee.employeeId}"/>"><c:out value="${employee.employeeId}"/></a></td>
              <td><c:out value="${employee.firstName}"/></td>
              <td><c:out value="${employee.lastName}"/></td>
              <td><c:out value="${employee.email}"/></td>
@@ -50,17 +50,17 @@
 	  </div>
 	</div>    
 	
-   <p>To return the login page, click on the Back button in your
-   browser or the Return button shown below.</p>
+   <p>To return the <i>Employee List</i> page, click on the Back button in your
+   browser or the <i>Return</i> button shown below.</p>
    
    <form action="employeeList.jsp" >
-      <input type="submit" value="Return">
+      <input type="submit" value="Return" class="btn btn-default">
    </form>
 	
 	<hr />
 	<div class="container text-center">
 	<footer>
-	   <p>&copy; Seneca College CJV805 </p>
+	   <p>&copy; Seneca College <script>document.write(new Date().getFullYear())</script> CJV805 </p>
 	</footer></div>
 </div>
 </body>

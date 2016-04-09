@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,12 @@
 						<li><a href="searchEmployee.jsp">Search Employee</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">${emp.firstName} ${emp.lastName}</a></li>
+						<c:if test="${not empty authUser}">
+							<li>${authUser.firstName}${authUser.lastName}</li>
+						</c:if>
+						<c:if test="${empty authUser}">
+							<c:redirect url="/index.html" />
+						</c:if>
 						<li class="active"><a href="logout.html"><span
 								class="glyphicon glyphicon-log-out"></span></a></li>
 					</ul>
@@ -64,13 +70,19 @@
 					</div>
 				</div>
 			</form>
-		
+
 
 		</div>
-			<hr>
+		<hr>
 		<div class="container text-center">
 			<footer>
-				<p>&copy;<script>document.write(new Date().getFullYear())</script> Seneca College CJV805 </p>
+				<p>
+					&copy;
+					<script>
+						document.write(new Date().getFullYear())
+					</script>
+					Seneca College CJV805
+				</p>
 			</footer>
 		</div>
 	</div>

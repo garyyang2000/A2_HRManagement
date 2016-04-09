@@ -11,7 +11,7 @@
 <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 <body>
-<body>
+
 	<div class="container body-content">
 	
 	<h2>Confirmation</h2>
@@ -72,7 +72,7 @@
    <tr><td class="col-md-2"><div class="form-group">
     <label for="mgrId" class="control-label">Manager ID</label></div>
     </td><td class="col-md-5"><div class="form-group">
-      ${emp.managerId}<div>
+      ${emp.managerId}</div>
     
   </td></tr>
    <tr><td class="col-md-2"><div class="form-group">
@@ -84,8 +84,9 @@
   
    <tr><td class="col-md-2">
     
-   </td><td class="col-md-5"><div class="form-group"><div class="form-group">
-       <button type="submit" class="btn btn-success col-sm-3">OK</button></div>
+   </td><td class="col-md-5"><div class="form-group">
+   <input type="button" value="Return" onclick="javascript:history.go(-2)" class="btn btn-success col-sm-3">
+   <%--    <a href="/GetEmployeeList" class="btn btn-success col-sm-3">Return</a> --%>
 	   
    </div>
   </td></tr>
@@ -93,9 +94,9 @@
    </form>   
 	   <div class="container text-center">
 <footer>
-      <p>&copy; Seneca College CJV805 </p>
+      <p>&copy; Seneca College <script>document.write(new Date().getFullYear())</script> CJV805 </p>
   </footer>
   </div>
-
+</div>
 </body>
 </html>

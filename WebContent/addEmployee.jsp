@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
+<%@page import="ca.myseneca.model.*"%>
+<%@page import="java.util.ArrayList"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,12 +22,12 @@
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li><a href="employeeList.jsp">Employee List</a></li>
-						<li class="active"><a href="addEmployee.jsp">New Employee</a></li>
+						<li class="active"><a href="">New Employee</a></li>
 						<li><a href="searchEmployee.jsp">Search Employee</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#">${emp.firstName} ${emp.lastName}</a></li>
-						<li class="active"><a href="index.html"><span
+						<li class="active"><a href="logout.html"><span
 								class="glyphicon glyphicon-log-out"></span></a></li>
 					</ul>
 				</div>
@@ -36,6 +39,8 @@
 			<h2>Add New Employee</h2>
 			<p>Here is the information that you retrieved from Oracle
 				database:</p>
+				<hr/>
+			<hr />
 			<form action="AddEmployee" method="POST">
 				<table>
 					<tr>
@@ -133,20 +138,29 @@
 									name="managerId">
 								<div></td>
 					</tr>
-					<tr>
+					<tr><%!%>
 						<td class="col-md-2"><div class="form-group">
-								<label for="deptId" class="control-label">Department ID</label>
+								<label for="deptId" class="control-label">Department</label>
 							</div></td>
 						<td class="col-md-5"><div class="form-group">
 								<select class="form-control" name="deptId">
-									<option value="80">Sales</option>
-									<option value="60">IT</option>
-									<option value="20">Marketing</option>
-									<option value="90">Executive</option>
+
+									<%
+										ArrayList<Department> departmentList = (ArrayList<Department>) DAManager.getAllDepartments();
+										if (departmentList != null) {
+											for (Department dpt : departmentList) {
+									%>
+									<option value="<%=dpt.getDeptId()%>"><%=dpt.getDeptName()%></option>
+
+									<%
+										}
+										}
+									%>
 								</select>
 
 							</div></td>
 					</tr>
+
 
 					<tr>
 						<td class="col-md-2"></td>
@@ -165,7 +179,13 @@
 	<hr />
 	<div class="container text-center">
 		<footer>
-			<p>&copy; Seneca College CJV805</p>
+			<p>
+				&copy; Seneca College
+				<script>
+					document.write(new Date().getFullYear())
+				</script>
+				CJV805
+			</p>
 		</footer>
 	</div>
 </body>

@@ -14,6 +14,7 @@
 		<h2>Edit Employee</h2>
 		<p>Here is the information that you retrieved from Oracle
 			database:</p>
+		<hr />
 		<form action="UpdateEmployee" method="POST">
 			<table>
 				<tr>

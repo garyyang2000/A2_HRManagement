@@ -20,11 +20,11 @@
 					<ul class="nav navbar-nav">
 						<li><a href="employeeList.jsp">Employee List</a></li>
 						<li><a href="addEmployee.jsp">New Employee</a></li>
-						<li class="active"><a href="#">Search Employee</a></li>
+						<li class="active"><a href="">Search Employee</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#">${emp.firstName} ${emp.lastName}</a></li>
-						<li class="active"><a href="index.html"><span
+						<li class="active"><a href="logout.html"><span
 								class="glyphicon glyphicon-log-out"></span></a></li>
 					</ul>
 				</div>
@@ -53,7 +53,7 @@
 		</div>
 		<div class="container text-center">
 			<footer>
-				<p>&copy; Seneca College CJV805</p>
+				<p>&copy; Seneca College <script>document.write(new Date().getFullYear())</script> CJV805</p>
 			</footer>
 		</div>
 	</div>

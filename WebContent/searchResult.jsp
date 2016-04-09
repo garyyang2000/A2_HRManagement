@@ -13,8 +13,8 @@
 <body>
 <div class="container body-content">
 
- <h2>Employees List View</h2>
-   <p>Here is the information that you retrieved from Oracle database:</p>
+ <h2>Search For Employee</h2>
+   <p>Employee search results for input: ${keyWord}</p>
    <div class="row">
      <div class="col-md-6">
 	    <table class="table table-striped">
@@ -46,11 +46,18 @@
 	      </c:forEach>
 	    </table>
 	  </div>
-	</div>    
+	</div> 
+	<p>To return the <i>Search for Employee</i> page, click on the Back button in your
+   browser or the <i>Return</i> button shown below.</p>
+   
+   <form action="searchEmployee.jsp" >
+      <input type="submit" value="Return" class="btn btn-default">
+   </form>
+	   
 	<hr/>
 <div class="container text-center">
 	<footer>
-	   <p>&copy; Seneca College CJV805 </p>
+	   <p>&copy; Seneca College <script>document.write(new Date().getFullYear())</script> CJV805 </p>
 	</footer></div>
 </div>
 </body>
