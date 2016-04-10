@@ -1,31 +1,26 @@
 /**
 * The DAManager class implements all methods  that can
-* be used to operate employees table.
+* be used to operate employees table. It provides static 
+* methods to get employee, department, employees and 
+* other useful function.
+* 
+* 
 * @author  Ge Yang, Bohao Liu, Yan Liu
-* @version 1.0
-* @since   2016-03-12 
+* @version 2.0
+* @since   2016-04-10 
 */
 package ca.myseneca.model;
 
 import java.sql.*;
 import java.util.ArrayList;
-
 import ca.myseneca.datasource.ConnectionPool;
-
 import java.math.BigDecimal;
 import oracle.jdbc.*;
 
 public class DAManager {
 
-//	private static Connection conn;
-	/*static {
-		if (conn == null) {
-			conn = ConnectionPool.getInstance().getConnection();
-		}
-	}
-*/
 	public static int getEmployeeID(String user, String password) {
-		int result = -1;		
+		int result = -1;
 		CallableStatement stmt = null;
 		ConnectionPool pool = ConnectionPool.getInstance();
 		Connection conn = pool.getConnection();
@@ -57,7 +52,7 @@ public class DAManager {
 					DBUtil.printSQLException(e);
 				}
 			}
-//			
+			//
 			pool.freeConnection(conn);
 			/*
 			 * if (conn != null) { try { conn.close(); } catch (SQLException e)
@@ -132,7 +127,6 @@ public class DAManager {
 		ConnectionPool pool = ConnectionPool.getInstance();
 		Connection conn = pool.getConnection();
 		try {
-			conn = DBUtil.getConnection();
 			stmt = conn.createStatement();
 			String sql = "SELECT * FROM EMPLOYEES";
 			stmt.execute(sql);
@@ -180,10 +174,7 @@ public class DAManager {
 				}
 			}
 			pool.freeConnection(conn);
-			/*
-			 * if (conn != null) { try { conn.close(); } catch (SQLException e)
-			 * { DBUtil.printSQLException(e); } }
-			 */
+
 		}
 		return allEmps;
 	}
@@ -249,10 +240,7 @@ public class DAManager {
 				}
 			}
 			pool.freeConnection(conn);
-			/*
-			 * if (conn != null) { try { conn.close(); } catch (SQLException e)
-			 * { DBUtil.printSQLException(e); } }
-			 */
+
 		}
 		return allEmps;
 	}
@@ -298,10 +286,7 @@ public class DAManager {
 				}
 			}
 			pool.freeConnection(conn);
-			/*
-			 * if (conn != null) { try { conn.close(); } catch (SQLException e)
-			 * { DBUtil.printSQLException(e); } }
-			 */
+
 		}
 		return allDepts;
 	}
@@ -369,10 +354,7 @@ public class DAManager {
 				}
 			}
 			pool.freeConnection(conn);
-			/*
-			 * if (conn != null) { try { conn.close(); } catch (SQLException e)
-			 * { DBUtil.printSQLException(e); } }
-			 */
+
 		}
 		return newEmp;
 	}
@@ -425,10 +407,7 @@ public class DAManager {
 				}
 			}
 			pool.freeConnection(conn);
-			/*
-			 * if (conn != null) { try { conn.close(); } catch (SQLException e)
-			 * { DBUtil.printSQLException(e); } }
-			 */
+
 		}
 		return result;
 	}

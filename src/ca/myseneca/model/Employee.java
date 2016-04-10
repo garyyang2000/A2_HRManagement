@@ -6,10 +6,13 @@ import java.sql.Date;
 
 /**
 * The Employee class a JavaBean class which is 
-* corresponding to Employees table in Oracle database.
+* corresponding to Employees table(but with a 
+* department name as program needs it) in 
+* Oracle database.
+* 
 * @author  Ge Yang, Bohao Liu, Yan Liu
-* @version 1.0
-* @since   2016-03-12 
+* @version 2.0
+* @since   2016-04-10 
 */
 
 public class Employee implements Serializable {

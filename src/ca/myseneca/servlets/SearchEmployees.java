@@ -13,7 +13,14 @@ import javax.servlet.http.HttpSession;
 import ca.myseneca.model.*;
 
 /**
- * Servlet implementation class SearchEmployees
+ * Servlet implementation class SearchEmployees This servlet class get the
+ * search word from searchEmployee.jsp and return the result list to
+ * searchResult.jsp.
+ * 
+ * @author Ge Yang, Bohao Liu, Yan Liu
+ * @version 2.0
+ * @since 2016-04-10
+ * 
  */
 @WebServlet("/SearchEmployees")
 public class SearchEmployees extends HttpServlet {

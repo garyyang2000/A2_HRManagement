@@ -14,7 +14,14 @@ import javax.servlet.http.HttpSession;
 import ca.myseneca.model.*;
 
 /**
- * Servlet implementation class UpdateEmployee
+ * Servlet implementation class UpdateEmployee This servlet class read all the
+ * user information from EditEmployee.jsp. Then update the database and forward
+ * to confirmation.jsp.
+ * 
+ * @author Ge Yang, Bohao Liu, Yan Liu
+ * @version 2.0
+ * @since 2016-04-10
+ * 
  */
 @WebServlet("/UpdateEmployee")
 public class UpdateEmployee extends HttpServlet {
@@ -56,7 +63,7 @@ public class UpdateEmployee extends HttpServlet {
 			String commPct = request.getParameter("commPct");
 			String managerId = request.getParameter("managerId");
 			String deptId = request.getParameter("deptId");
-			String dept=request.getParameter("dept");
+			String dept = request.getParameter("dept");
 			Employee emp = new Employee();
 			try {
 				int empId = Integer.parseInt(strEmpId);

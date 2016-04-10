@@ -12,7 +12,16 @@ import java.util.ArrayList;
 import ca.myseneca.model.*;
 
 /**
- * Servlet implementation class GetEmployeeList
+ * Servlet implementation class GetEmployeeList It gets employee list and output
+ * it into showEmployeeList.jsp. First it will check which button user clicked,
+ * Show all employees or Show employees in one certain department. Then it
+ * called method in DAManager class, return the result list to
+ * showEmployeeList.jsp.
+ * 
+ * @author Ge Yang, Bohao Liu, Yan Liu
+ * @version 2.0
+ * @since 2016-04-10
+ * 
  */
 @WebServlet(description = "Get all employee or employee from certain department", urlPatterns = { "/GetEmployeeList" })
 public class GetEmployeeList extends HttpServlet {

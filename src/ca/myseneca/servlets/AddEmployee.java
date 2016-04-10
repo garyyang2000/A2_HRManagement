@@ -14,7 +14,13 @@ import javax.servlet.http.HttpSession;
 import ca.myseneca.model.*;
 
 /**
- * Servlet implementation class AddEmployee
+ * Servlet implementation class AddEmployee It reads in the input information
+ * posted from addEmployee.jsp page and forward information to confirmation.jsp
+ * if everything is good.
+ * 
+ * @author  Ge Yang, Bohao Liu, Yan Liu
+ * @version 2.0
+ * @since   2016-04-10 
  */
 @WebServlet("/AddEmployee")
 public class AddEmployee extends HttpServlet {

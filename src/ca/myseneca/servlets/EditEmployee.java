@@ -13,7 +13,13 @@ import javax.servlet.http.HttpSession;
 import ca.myseneca.model.*;
 
 /**
- * Servlet implementation class EditEmployee
+ * Servlet implementation class EditEmployee. It checks employee id forwarded by
+ * showEmployeeList.jsp then get all the employee information and inject it to
+ * EditEmployee.jsp.
+ * 
+ * @author Ge Yang, Bohao Liu, Yan Liu
+ * @version 2.0
+ * @since 2016-04-10
  */
 @WebServlet("/EditEmployee")
 public class EditEmployee extends HttpServlet {
@@ -41,7 +47,7 @@ public class EditEmployee extends HttpServlet {
 
 		} else {
 			String strEmpID = request.getParameter("id");
-			String strDeptId=request.getParameter("dept");
+			String strDeptId = request.getParameter("dept");
 			int empID = Integer.parseInt(strEmpID);
 			Employee emp = DAManager.getEmployeeByID(empID);
 			ArrayList<Department> depts = DAManager.getAllDepartments();

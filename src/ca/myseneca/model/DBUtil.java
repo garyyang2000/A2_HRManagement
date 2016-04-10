@@ -1,45 +1,20 @@
 /**
 * The DBUtil class implements utility methods that can
-* be used to connect to oracle database Neptune, print related exceptions and warnings.
+* be used to print related exceptions and warnings.
+* 
 * @author  Ge Yang, Bohao Liu, Yan Liu
-* @version 1.0
-* @since   2016-03-12 
+* @version 2.0
+* @since   2016-04-10 
 */
 package ca.myseneca.model;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.sql.BatchUpdateException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
-import java.util.InvalidPropertiesFormatException;
-import java.util.Properties;
-import ca.myseneca.datasource.*;
+
 
 public class DBUtil {
-
-	public static Connection getConnection() throws SQLException {
-		Connection conn = null;
-		ConnectionPool pool = ConnectionPool.getInstance();
-		conn = pool.getConnection();
-		return conn;
-	}
-
-	public static void closeConnection(Connection connArg) {
-		System.out.println("Releasing all open resources ...");
-		try {
-			if (connArg != null) {
-				connArg.close();
-				connArg = null;
-			}
-		} catch (SQLException sqle) {
-			printSQLException(sqle);
-		}
-	}
 
 	public static void printSQLException(SQLException ex) {
 		for (Throwable e : ex) {
