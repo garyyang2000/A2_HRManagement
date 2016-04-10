@@ -35,7 +35,7 @@
 	
          <c:forEach var="employee" items="${employeeList}" >
            <tr>
-             <td><a href="EditEmployee?id=<c:out value="${employee.employeeId}"/>"><c:out value="${employee.employeeId}"/></a></td>
+             <td><a href="EditEmployee?id=<c:out value="${employee.employeeId}"/>&dept=${dept}"><c:out value="${employee.employeeId}"/></a></td>
              <td><c:out value="${employee.firstName}"/></td>
              <td><c:out value="${employee.lastName}"/></td>
              <td><c:out value="${employee.email}"/></td>

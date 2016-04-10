@@ -56,6 +56,7 @@ public class UpdateEmployee extends HttpServlet {
 			String commPct = request.getParameter("commPct");
 			String managerId = request.getParameter("managerId");
 			String deptId = request.getParameter("deptId");
+			String dept=request.getParameter("dept");
 			Employee emp = new Employee();
 			try {
 				int empId = Integer.parseInt(strEmpId);
@@ -91,6 +92,7 @@ public class UpdateEmployee extends HttpServlet {
 						request.setAttribute("emp", emp);
 						message = "The following employee information has been updated to the database.";
 						request.setAttribute("message", message);
+						request.setAttribute("dept", dept);
 						url = "/confirmation.jsp";
 					} else {
 						message = "Failed to update to the database, please check your input and try again.";
@@ -102,6 +104,7 @@ public class UpdateEmployee extends HttpServlet {
 						request.setAttribute("emp", emp);
 						message = "The following employee information has been deleted from database.";
 						request.setAttribute("message", message);
+						request.setAttribute("dept", dept);
 						url = "/confirmation.jsp";
 					} else {
 						message = "Failed to update to the database, please check your input and try again.";

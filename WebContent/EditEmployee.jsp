@@ -123,15 +123,15 @@
 						</div></td>
 					<td class="col-md-5"><div class="form-group">
 							<select name="deptId" class="form-control">
-								<c:forEach items="${departments}" var="dept">
-									<option value="${dept.deptId}"
-										selected=${dept.deptId == emp.departmentId ? 'selected' : ''}>${dept.deptName}
+								<c:forEach items="${departments}" var="department">
+									<option value="${department.deptId}"
+										selected=${department.deptId == emp.departmentId ? 'selected' : ''}>${department.deptName}
 									</option>
 								</c:forEach>
 							</select>
 						</div></td>
 				</tr>
-
+				<input type="hidden" name="dept" value="${dept}">
 				<tr>
 					<td class="col-md-2"></td>
 					<td class="col-md-5"><div class="form-group pull-right">

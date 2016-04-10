@@ -41,12 +41,14 @@ public class EditEmployee extends HttpServlet {
 
 		} else {
 			String strEmpID = request.getParameter("id");
+			String strDeptId=request.getParameter("dept");
 			int empID = Integer.parseInt(strEmpID);
 			Employee emp = DAManager.getEmployeeByID(empID);
 			ArrayList<Department> depts = DAManager.getAllDepartments();
 			if (emp != null) {
 				request.setAttribute("emp", emp);
 				request.setAttribute("departments", depts);
+				request.setAttribute("dept", strDeptId);
 				url = "/EditEmployee.jsp";
 			} else {
 				url = "/errorPage.jsp";

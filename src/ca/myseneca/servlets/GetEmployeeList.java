@@ -51,6 +51,7 @@ public class GetEmployeeList extends HttpServlet {
 				request.setAttribute("employeeList", employees);
 				message = "employee information of all employees";
 				request.setAttribute("message", message);
+				request.setAttribute("dept", 0);
 				url = "/showEmployeeList.jsp";
 			} else if (btn.equals("DeptEmps")) {
 				// update button was pressed
@@ -65,6 +66,7 @@ public class GetEmployeeList extends HttpServlet {
 				request.setAttribute("employeeList", employees);
 				message = "employee information of " + deptName + " department";
 				request.setAttribute("message", message);
+				request.setAttribute("dept", deptId);
 				url = "/showEmployeeList.jsp";
 
 			} else {
